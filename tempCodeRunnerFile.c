@@ -15,9 +15,8 @@ struct Cliente{
     Producto * productos;
 }typedef Cliente;
 
-void cargarClientes(Cliente * datos, char * tiposProductos[]);
+void cargarClientes(Cliente * datos, char * tiposProductos);
 void mostrarClientes(Cliente * datos);
-
 
 int main(){
     char * tiposProductos[] = {"Galletas","Snack","Cigarillos","Caramelos","Bebidas"};
@@ -41,21 +40,18 @@ int main(){
     return 0;
 }
 
-void cargarClientes(Cliente * datos, char * tiposProductos[]){
+void cargarClientes(Cliente * datos, char * tiposProductos){
     char buffer[100];
         
         printf("Ingrese nombre del cliente:");
-        fflush(stdin);
         gets(buffer);
-        datos->nombreCliente=(char *)malloc(sizeof(char) * (strlen(buffer)) + 1);
         strcpy(datos->nombreCliente, buffer);
         datos->cantidadProductosAPedir = rand() % 5 + 1;
         datos->productos = (Producto *)malloc(sizeof(Producto) * datos->cantidadProductosAPedir);
         for(int j = 0; j < datos->cantidadProductosAPedir; j++){
             datos->productos[j].cantidad = rand() % 10 + 1;
-            datos->productos[j].tipoProducto = tiposProductos[rand() % 4 + 1];
+            datos->productos[j].tipoProducto = tiposProductos[rand() % 5 + 1];
             datos->productos[j].precioUnitario = rand() % (400 + 1) + 100;
-
         }
 
 
@@ -75,14 +71,6 @@ void mostrarClientes(Cliente * datos){
 
             printf("Cantidad productos %d\n", datos->productos[j].cantidad);
             printf("Tipo: %s\n", datos->productos[j].tipoProducto);
-            printf("Precio: %.2f\n", datos->productos[j].precioUnitario);
-            printf("Precio total x%d productos: %2.f\n", datos->productos[j].cantidad, (datos->productos[j].precioUnitario * datos->productos[j].cantidad));
-            
+            printf("Precio: %f\n", datos->productos[j].precioUnitario);
         }
     }
-
-    
-
-
-
-
